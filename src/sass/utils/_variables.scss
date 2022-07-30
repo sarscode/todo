@@ -1,0 +1,56 @@
+/*=============================================
+=                    Colors                   =
+=============================================*/
+
+$black: #69665c;
+$gray: #b2afa1;
+$white: #fff;
+$yellow: #fff9de;
+$green: #daf206;
+$cyan: #d1e5f7;
+$purple: #d2ceff;
+$red: #ffcece;
+
+/*=====  End of Colors  ======*/
+
+/*=============================================
+=                  Typography                 =
+=============================================*/
+
+/* https://spectrum.adobe.com/page/fonts */
+$adobe-clean: 'Adobe Clean', sans-serif;
+
+/*----------  Font Sizes   ----------*/
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+
+/*----------  Heading sizes  ----------*/
+$heading-1: 2rem; // 32px
+$heading-2: 1.5rem; // 24px
+$heading-3: 1rem; // 16px
+$display: 4rem; // 64px
+$display-2: 3rem; // 48px
+
+/*----------  Font weights  ----------*/
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+/*=====  End of Typography  ======*/
+
+/*=============================================
+=                  Breakpoints                =
+=============================================*/
+$breakpoints: (
+  // 480px
+  sm: '30em',
+  // 768px
+  md: '48em',
+  // 1024px
+  lg: '64em',
+  // 1280px
+  xl: '80em'
+);
+/*=====  End of Breakpoints  ======*/

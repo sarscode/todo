@@ -1,0 +1,28 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+p {
+  line-height: 1.4;
+}
