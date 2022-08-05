@@ -1,0 +1,50 @@
+$colors: (
+  var(--system-tag-color-one),
+  var(--system-tag-color-two),
+  var(--system-tag-color-three),
+  var(--system-tag-color-four)
+);
+
+@mixin logo-chars {
+  @for $i from 1 through length($colors) {
+    .logo__char:nth-child(#{$i}) {
+      color: nth($colors, $i);
+    }
+  }
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  position: relative;
+
+  &.lg {
+    font-size: 4rem;
+  }
+
+  &.colored {
+    @include logo-chars();
+  }
+
+  &.striked::before {
+    animation: strikeInRight 1s ease-in-out forwards;
+    background-color: currentColor;
+    content: '';
+    display: inline-block;
+    height: 0.2rem;
+    position: absolute;
+    top: 58%;
+  }
+}
+
+@keyframes strikeInRight {
+  from {
+    opacity: 0;
+    width: 0;
+  }
+
+  to {
+    opacity: 1;
+    width: 100%;
+  }
+}

@@ -1,3 +1,12 @@
+:root {
+  --system-text-primary-color: #{$text-primary-color};
+  --system-body-font-family: #{$body-font-family};
+  --system-tag-color-one: #{$tag-color-one};
+  --system-tag-color-two: #{$tag-color-two};
+  --system-tag-color-three: #{$tag-color-three};
+  --system-tag-color-four: #{$tag-color-four};
+}
+
 html {
   box-sizing: border-box;
 }
@@ -9,6 +18,8 @@ html {
 }
 
 body {
+  color: var(--system-text-primary-color);
+  font-family: var(--system-body-font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
