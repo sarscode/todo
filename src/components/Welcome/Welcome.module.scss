@@ -1,0 +1,17 @@
+.welcome {
+  align-items: center;
+  animation: slideOutUp 1.2s ease-out 1.5s forwards;
+  background-color: var(--system-body-secondary-bg);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
+
+@keyframes slideOutUp {
+  to {
+    transform: translateY(-100%);
+  }
+}
