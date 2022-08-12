@@ -12,6 +12,8 @@
   --system-btn-primary-color: #{$btn-primary-color};
   --system-btn-primary-shadow: #{$btn-primary-shadow};
   --system-btn-outline-bg: #{$btn-outline-bg};
+  --system-input-bg: #{$input-bg};
+  --system-input-focus-bg: #{$input-focus-bg};
 }
 
 html {
@@ -43,4 +45,8 @@ a {
 
 p {
   line-height: 1.4;
+}
+
+input:focus {
+  outline: none;
 }

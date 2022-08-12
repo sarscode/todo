@@ -13,3 +13,6 @@ $btn-primary-bg: var(--btn-primary-bg, $black);
 $btn-primary-color: var(--btn-primary-color, $white);
 $btn-primary-shadow: var(--btn-primary-shadow, rgba($gray, 0.4));
 $btn-outline-bg: var(--btn-outline-bg, rgba($gray, 0.3));
+
+$input-bg: var(--input-bg, rgba($gray, 0.1));
+$input-focus-bg: var(--input-bg-focus, rgba($gray, 0.3));
