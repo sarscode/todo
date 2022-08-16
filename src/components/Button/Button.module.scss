@@ -3,6 +3,10 @@
   border-radius: 0.5rem;
   padding: 0.8rem 2.5rem;
 
+  &.fw {
+    width: 100%;
+  }
+
   &.btn-link {
     align-items: center;
     display: inline-flex;
@@ -16,7 +20,9 @@
   &.inline {
     background-color: transparent;
     color: inherit;
+    font-weight: bold;
     padding: 0;
+    text-decoration: underline;
     transition: color 0.3s ease-in-out;
 
     &:hover {

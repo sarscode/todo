@@ -5,28 +5,42 @@ import { Link, LinkProps } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   variant?: 'inline' | 'base' | 'outline';
+  fullWidth?: boolean;
 }
 
-interface ButtonLinkProps extends LinkProps {
+export interface ButtonLinkProps extends LinkProps {
   to: string;
   isExternal?: boolean;
   label: string;
   variant?: 'inline' | 'base' | 'outline';
+  fullWidth?: boolean;
 }
 
 type Props = ButtonProps | ButtonLinkProps;
 
-function Button({ label, className, variant = 'base', ...props }: Props) {
+function Button({
+  label,
+  className,
+  fullWidth,
+  variant = 'base',
+  ...props
+}: Props) {
   if ('to' in props) {
     const { isExternal, to, ...linkProps } = props;
     if (isExternal) {
       return (
         <a
           href={to}
-          className={cx('btn', 'btn-link', variant, className)}
+          className={cx(
+            'btn',
+            'btn-link',
+            { fw: fullWidth },
+            variant,
+            className
+          )}
           target="_blank"
           rel="noreferrer"
           {...linkProps}
@@ -53,14 +67,20 @@ function Button({ label, className, variant = 'base', ...props }: Props) {
       );
     } else {
       return (
-        <Link className={cx('btn', variant, className)} {...props}>
+        <Link
+          className={cx('btn', { fw: fullWidth }, variant, className)}
+          {...props}
+        >
           {label}
         </Link>
       );
     }
   } else {
     return (
-      <button className={cx('btn', variant, className)} {...props}>
+      <button
+        className={cx('btn', { fw: fullWidth }, variant, className)}
+        {...props}
+      >
         {label}
       </button>
     );

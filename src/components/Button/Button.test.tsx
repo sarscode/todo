@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Button } from '../';
+import Button, { ButtonProps, ButtonLinkProps } from './Button';
 
 test('should render a button with crashing', () => {
-  const props = {
+  const props: ButtonProps = {
     label: 'Button',
   };
 
@@ -13,7 +13,7 @@ test('should render a button with crashing', () => {
 });
 
 test('should render disabled button if "disbabled" prop is true', () => {
-  const props = {
+  const props: ButtonProps = {
     label: 'Button',
   };
 
@@ -23,7 +23,7 @@ test('should render disabled button if "disbabled" prop is true', () => {
 });
 
 test('should render an anchor element when "to" prop is present', () => {
-  const props = {
+  const props: ButtonLinkProps = {
     label: 'Button Link',
     to: '/',
   };
@@ -42,7 +42,7 @@ test('should render an anchor element when "to" prop is present', () => {
 });
 
 test('should render external link icon if "isExternal" prop is true', () => {
-  const props = {
+  const props: ButtonLinkProps = {
     label: 'Button Link',
     to: 'https://google.com',
     isExternal: true,
