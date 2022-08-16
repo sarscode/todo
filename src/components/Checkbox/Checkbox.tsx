@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes, LegacyRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Checkbox.module.scss';
 
@@ -10,23 +10,29 @@ export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   fullWidth?: boolean;
 }
 
-function Checkbox({ id, fullWidth, label, ...props }: CheckboxProps) {
-  return (
-    <>
-      <label
-        htmlFor={id}
-        className={cx('checkbox-label', { required: props.required })}
-      >
-        <input
-          type="checkbox"
-          id={id}
-          className={cx('checkbox', { fullWidth: fullWidth })}
-          {...props}
-        />
-        {label}
-      </label>
-    </>
-  );
-}
+const Checkbox = forwardRef(
+  (
+    { id, fullWidth, label, ...props }: CheckboxProps,
+    ref: LegacyRef<HTMLInputElement> | undefined
+  ) => {
+    return (
+      <>
+        <label
+          htmlFor={id}
+          className={cx('checkbox-label', { required: props.required })}
+        >
+          <input
+            type="checkbox"
+            id={id}
+            className={cx('checkbox', { fullWidth: fullWidth })}
+            ref={ref}
+            {...props}
+          />
+          {label}
+        </label>
+      </>
+    );
+  }
+);
 
 export default Checkbox;

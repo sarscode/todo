@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes, LegacyRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Input.module.scss';
 
@@ -9,25 +9,33 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   id: string;
   fullWidth?: boolean;
+  error?: string;
 }
 
-function Input({ type = 'text', label, id, fullWidth, ...props }: InputProps) {
-  return (
-    <>
-      <label
-        htmlFor={id}
-        className={cx('input-label', { required: props.required })}
-      >
-        {label}
-      </label>
-      <input
-        type={type}
-        id={id}
-        className={cx('input', { fw: fullWidth })}
-        {...props}
-      />
-    </>
-  );
-}
+const Input = forwardRef(
+  (
+    { type = 'text', label, id, fullWidth, error, ...props }: InputProps,
+    ref: LegacyRef<HTMLInputElement> | undefined
+  ) => {
+    return (
+      <>
+        <label
+          htmlFor={id}
+          className={cx('input-label', { required: props.required })}
+        >
+          {label}
+        </label>
+        <input
+          type={type}
+          id={id}
+          className={cx('input', { fw: fullWidth, error: error })}
+          ref={ref}
+          {...props}
+        />
+        {error && <small className={cx('input-error')}>{error}</small>}
+      </>
+    );
+  }
+);
 
 export default Input;

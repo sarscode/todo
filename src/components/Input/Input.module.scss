@@ -5,6 +5,16 @@
   margin-bottom: 1rem;
   padding: 1rem;
 
+  &.error {
+    margin-bottom: 0.25rem;
+  }
+
+  &-error {
+    color: var(--system-input-error-color);
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
   &:focus {
     background-color: var(--system-input-focus-bg);
   }

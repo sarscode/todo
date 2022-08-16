@@ -16,3 +16,4 @@ $btn-outline-bg: var(--btn-outline-bg, rgba($gray, 0.3));
 
 $input-bg: var(--input-bg, rgba($gray, 0.1));
 $input-focus-bg: var(--input-bg-focus, rgba($gray, 0.3));
+$input-error-color: var(--input-error-color, darken($red, 15%));
