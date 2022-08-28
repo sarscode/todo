@@ -1,0 +1,52 @@
+.tag {
+  align-items: center;
+  display: inline-flex;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  min-width: max-content;
+  padding: 0.5rem 1rem;
+  position: relative;
+
+  &.hidden {
+    padding: 0;
+  }
+}
+
+.tag-checkbox {
+  appearance: none;
+  appearance: none;
+  background: none; /* for Internet Explorer */
+  border-radius: 0.5rem;
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  width: 100%;
+
+  &:checked {
+    background-color: var(--system-input-bg);
+  }
+}
+
+.tag-color {
+  border-radius: 50%;
+  display: block;
+  height: 1.5rem;
+  margin-right: 0.5rem;
+  width: 1.5rem;
+}
+
+.tag-color-one {
+  background: var(--system-tag-color-one);
+}
+
+.tag-color-two {
+  background: var(--system-tag-color-two);
+}
+
+.tag-color-three {
+  background: var(--system-tag-color-three);
+}
+
+.tag-color-four {
+  background: var(--system-tag-color-four);
+}
