@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Tag from './Tag';
 
 test('should Tag without crashing', () => {
-  render(<Tag color="one" label="work" />);
+  render(<Tag id="one" label="work" />);
   const tag = screen.getByTestId('tag');
   const tagColor = screen.getByTestId('tag-color');
   const tagLabel = screen.getByTestId('tag-label');
@@ -17,7 +17,7 @@ test('should Tag without crashing', () => {
 });
 
 test('should hide tag label if hideLabel is true', () => {
-  render(<Tag color="one" label="work" hideLabel />);
+  render(<Tag id="one" label="work" hideLabel />);
 
   const tagLabel = screen.queryByTestId('tag-label');
   const tagCheckbox = screen.queryByTestId('tag-checkbox');
