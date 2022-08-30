@@ -41,7 +41,7 @@ jobs:
           else
           npm i
           fi
-          npm run build
+          npm run build-storybook
       
       - name: Publish to surge.sh
         uses: dswistowski/surge-sh-action@v1.0.1
