@@ -6,5 +6,6 @@ export { default as Input } from './Input/Input';
 export { default as Layout } from './Layout/Layout';
 export { default as Loader } from './Loader/Loader';
 export { default as Logo } from './Logo/Logo';
+export { default as Modal } from './Modal/Modal';
 export { default as Tag } from './Tag/Tag';
 export { default as Welcome } from './Welcome/Welcome';

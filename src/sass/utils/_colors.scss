@@ -17,3 +17,9 @@ $btn-outline-bg: var(--btn-outline-bg, rgba($gray, 0.3));
 $input-bg: var(--input-bg, rgba($gray, 0.1));
 $input-focus-bg: var(--input-bg-focus, rgba($gray, 0.3));
 $input-error-color: var(--input-error-color, darken($red, 25%));
+
+$alert-error-bg: var(--alert-error-bg, $tag-color-three);
+
+$todo-item-bg: var(--todo-item-bg, $yellow);
+
+$overlay-bg: var(--overlay-bg, rgba($black, 0.6));

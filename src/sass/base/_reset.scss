@@ -15,6 +15,9 @@
   --system-input-bg: #{$input-bg};
   --system-input-focus-bg: #{$input-focus-bg};
   --system-input-error-color: #{$input-error-color};
+  --system-alert-error-bg: #{$alert-error-bg};
+  --system-todo-item-bg: #{$todo-item-bg};
+  --system-overlay-bg: #{$overlay-bg};
 }
 
 html {
@@ -50,4 +53,9 @@ p {
 
 input:focus {
   outline: none;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
 }

@@ -1,0 +1,31 @@
+.modal {
+  align-items: center;
+  background-color: var(--system-overlay-bg);
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.content {
+  background-color: var(--system-body-primary-bg);
+  height: 100vh;
+  margin: 0 auto;
+  overflow: auto;
+  padding: 2rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 48em) {
+  .content {
+    border-radius: 1rem;
+    height: auto;
+    max-width: 600px;
+    position: relative;
+    width: 85%;
+  }
+}
