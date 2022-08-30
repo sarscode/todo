@@ -5,10 +5,15 @@ import styles from './Loader.module.scss';
 
 const cx = classNames.bind(styles);
 
-const Loader = () => {
+interface LoaderProps {
+  variant?: 'base' | 'page';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const Loader = ({ variant = 'base', size = 'sm' }: LoaderProps) => {
   return (
-    <div className={cx('container')}>
-      <span className={cx('loader')}></span>
+    <div className={cx('container', variant)}>
+      <span className={cx('loader', variant, size)}></span>
     </div>
   );
 };
