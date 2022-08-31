@@ -1,0 +1,72 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+
+  @media screen and (min-width: 64em) {
+    min-height: 88vh;
+  }
+}
+
+.sidebar {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding: 1rem 0;
+  width: 100%;
+
+  @media screen and (min-width: 64em) {
+    flex-direction: column;
+    max-width: 250px;
+    position: relative;
+    width: 25%;
+
+    &::after {
+      align-self: center;
+      bottom: 0;
+      content: url('../../assets/images/lady_illustration.png');
+      position: absolute;
+    }
+  }
+
+  &-nav {
+    display: flex;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    width: 100%;
+
+    @media screen and (min-width: 64em) {
+      flex-direction: column;
+    }
+
+    &::-webkit-scrollbar {
+      appearance: none;
+      display: none;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main {
+  flex-grow: 1;
+  width: 100%;
+
+  @media screen and (min-width: 64em) {
+    padding: 1rem;
+    width: 75%;
+  }
+}
+
+.done {
+  padding: 1rem 0.5rem;
+  width: 100%;
+}
+
+.add {
+  cursor: pointer;
+}

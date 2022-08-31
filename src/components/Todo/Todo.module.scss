@@ -1,0 +1,45 @@
+.todo {
+  background-color: var(--system-todo-item-bg);
+
+  height: max-content;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 100%;
+
+  &.done {
+    text-decoration: line-through;
+  }
+
+  @media screen and (min-width: 48em) {
+    margin-right: 4%;
+    width: 48%;
+
+    &:nth-child(even) {
+      margin-right: 0;
+    }
+  }
+
+  @media screen and (min-width: 92em) {
+    margin-right: 2%;
+    width: 32%;
+
+    &:nth-child(even) {
+      margin-right: 2%;
+    }
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}
+
+.todo-title {
+  margin: 0;
+}
+
+.todo-header,
+.todo-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
