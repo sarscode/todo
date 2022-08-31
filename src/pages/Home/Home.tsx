@@ -3,11 +3,17 @@ import { Welcome, Container, Logo, Button } from '../../components';
 
 import previewImage from '../../assets/images/preview.png';
 import styles from './Home.module.scss';
+import useAuth from '../../hooks/useAuth';
+import { Navigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Home() {
-  return (
+  const { user } = useAuth();
+
+  return user ? (
+    <Navigate to="/todos" replace />
+  ) : (
     <>
       <Welcome />
       <Container>

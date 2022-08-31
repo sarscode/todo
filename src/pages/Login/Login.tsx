@@ -1,27 +1,33 @@
 import classNames from 'classnames/bind';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { Button, Input, Container, Logo } from '../../components';
+import { Link, useNavigate } from 'react-router-dom';
+import { Alert, Button, Input, Container, Logo } from '../../components';
+import useAuth from '../../hooks/useAuth';
+import { IUserLogin } from '../../@types/user';
 
 import styles from './Login.module.scss';
 
 const cx = classNames.bind(styles);
-
-interface ILoginForm {
-  email: string;
-  password: string;
-}
 
 function Login() {
   const {
     register,
     handleSubmit,
     formState: { isValid, errors },
-  } = useForm<ILoginForm>({ mode: 'all' });
+  } = useForm<IUserLogin>({ mode: 'all' });
+  const { login, error, loading, user } = useAuth();
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<ILoginForm> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IUserLogin> = async ({ email, password }) => {
+    login({ email, password });
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/todos', { replace: true });
+    }
+  }, [navigate, user]);
 
   return (
     <Container className={cx('main')}>
@@ -66,11 +72,13 @@ function Login() {
             <Button label="Reset it" to="/" variant="inline" />
           </small>
         </div>
+        {error && <Alert status="error" message={error} autoClose />}
         <Button
           type="submit"
           label="Continue"
           className={cx('cta')}
-          disabled={!isValid}
+          disabled={!isValid || loading}
+          loading={loading}
           fullWidth
         />
       </form>

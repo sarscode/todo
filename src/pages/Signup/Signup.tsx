@@ -2,13 +2,14 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button, Checkbox, Container, Input, Logo } from '../../components';
+import useAuth from '../../hooks/useAuth';
 
 import styles from './Signup.module.scss';
 
 const cx = classNames.bind(styles);
 
 interface ISignupForm {
-  firstName: string;
+  displayName: string;
   email: string;
   password: string;
   terms: boolean;
@@ -21,8 +22,12 @@ function Signup() {
     register,
   } = useForm<ISignupForm>({ mode: 'all' });
 
-  const onSubmit: SubmitHandler<ISignupForm> = (data) => {
-    console.log(data);
+  const { signup, loading } = useAuth();
+
+  const onSubmit: SubmitHandler<ISignupForm> = async (data) => {
+    const { displayName, email, password } = data;
+    const response = await signup({ displayName, email, password });
+    console.log(response);
   };
 
   return (
@@ -41,10 +46,10 @@ function Signup() {
             placeholder="First Name"
             label="First Name"
             id="name"
-            error={errors?.firstName?.message}
+            error={errors?.displayName?.message}
             required
             fullWidth
-            {...register('firstName', {
+            {...register('displayName', {
               required: { value: true, message: 'First name is required' },
               maxLength: {
                 value: 25,
@@ -92,7 +97,8 @@ function Signup() {
             type="submit"
             label="Create My Account"
             className={cx('cta')}
-            disabled={!isValid}
+            disabled={!isValid || loading}
+            loading={loading}
             fullWidth
           />
           <div>
