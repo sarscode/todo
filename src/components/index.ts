@@ -10,4 +10,5 @@ export { Menu, MenuButton, MenuList, MenuListItem } from './Menu/Menu';
 export { default as Modal } from './Modal/Modal';
 export { default as Navbar } from './Navbar/Navbar';
 export { default as Tag } from './Tag/Tag';
+export { default as TextArea } from './TextArea/TextArea';
 export { default as Welcome } from './Welcome/Welcome';
