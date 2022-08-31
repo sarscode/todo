@@ -8,5 +8,6 @@ export { default as Loader } from './Loader/Loader';
 export { default as Logo } from './Logo/Logo';
 export { Menu, MenuButton, MenuList, MenuListItem } from './Menu/Menu';
 export { default as Modal } from './Modal/Modal';
+export { default as Navbar } from './Navbar/Navbar';
 export { default as Tag } from './Tag/Tag';
 export { default as Welcome } from './Welcome/Welcome';
