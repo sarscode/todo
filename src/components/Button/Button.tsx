@@ -2,6 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Button.module.scss';
 import { Link, LinkProps } from 'react-router-dom';
+import { Loader } from '../';
 
 const cx = classNames.bind(styles);
 
@@ -9,6 +10,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   variant?: 'inline' | 'base' | 'outline';
   fullWidth?: boolean;
+  loading?: boolean;
 }
 
 export interface ButtonLinkProps extends LinkProps {
@@ -76,6 +78,17 @@ function Button({
       );
     }
   } else {
+    if ('loading' in props) {
+      const { loading, ...buttonProps } = props;
+      return (
+        <button
+          className={cx('btn', { fw: fullWidth }, variant, className)}
+          {...buttonProps}
+        >
+          {loading ? <Loader /> : label}
+        </button>
+      );
+    }
     return (
       <button
         className={cx('btn', { fw: fullWidth }, variant, className)}
