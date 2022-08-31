@@ -52,5 +52,3 @@ jobs:
           login: ${{ secrets.SURGE_LOGIN }}
           # surge.sh token, generate it with `surge token` command
           token: ${{ secrets.SURGE_TOKEN }}
-          # your project path
-          project: dist
