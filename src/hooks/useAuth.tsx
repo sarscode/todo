@@ -68,7 +68,7 @@ function useAuth() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [dispatch]);
 
   return { user, loading, error, login, logout, signup };
 }

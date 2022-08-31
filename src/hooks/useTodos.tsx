@@ -20,7 +20,7 @@ function useTodos() {
   const deleteTodo = async (todo: ITodo) => {
     dispatch({ type: 'DELETE_TODO', payload: todo });
     setLoading(true);
-    const response = await removeTodo(todo);
+    await removeTodo(todo);
     setLoading(false);
   };
 
