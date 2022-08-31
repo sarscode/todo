@@ -34,9 +34,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: build
         run: |
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
+          if [ -e package-lock.json ]; then
           npm ci
           else
           npm i
