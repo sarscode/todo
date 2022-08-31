@@ -1,0 +1,35 @@
+.alert {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  max-width: 100%;
+  min-width: 400px;
+  padding: 1rem;
+
+  &__content {
+    flex-grow: 2;
+  }
+
+  &.error {
+    background-color: var(--system-alert-error-bg);
+  }
+}
+
+.close-btn {
+  background-color: transparent;
+  border: 0;
+  border-radius: 50%;
+  height: 1.5em;
+  padding: 0.25em;
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
+
+  &:hover {
+    background-color: var(--system-btn-primary-shadow);
+  }
+}

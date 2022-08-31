@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AuthContextProvider from './context/AuthContext';
+import TodoContextProvider from './context/TodoContext';
+import { Home, Login, Signup } from './pages';
+import Protected from './pages/Protected/Protected';
+import Todos from './pages/Todos/Todos';
 import reportWebVitals from './reportWebVitals';
 import './sass/global.scss';
 
@@ -8,7 +14,25 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <></>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/todos"
+            element={
+              <Protected>
+                <TodoContextProvider>
+                  <Todos />
+                </TodoContextProvider>
+              </Protected>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

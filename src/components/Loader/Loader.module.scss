@@ -1,0 +1,58 @@
+.container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+
+  &.page {
+    min-height: 100vh;
+  }
+}
+
+.loader {
+  display: inline-block;
+  width: auto;
+
+  &::after {
+    animation: rotating 1.2s linear infinite;
+    border: 2px solid currentColor;
+    border-color: currentColor transparent;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  &.page {
+    &::after {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+
+  &.md {
+    &::after {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+
+  &.lg {
+    &::after {
+      height: 3rem;
+      width: 3rem;
+    }
+  }
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

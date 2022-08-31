@@ -1,2 +1,25 @@
-$text-primary-color: var(--system-text-primary-color, $black);
-$text-secondary-color: var(--system-text-secondary-color, $gray);
+$text-primary-color: var(--text-primary-color, $black);
+$text-secondary-color: var(--text-secondary-color, $gray);
+
+$tag-color-one: var(--tag-color-one, $purple);
+$tag-color-two: var(--tag-color-two, $cyan);
+$tag-color-three: var(--tag-color-three, $red);
+$tag-color-four: var(--tag-color-four, $green);
+
+$body-primary-bg: var(--body-primary-bg, $white);
+$body-secondary-bg: var(--body-secondary-bg, $yellow);
+
+$btn-primary-bg: var(--btn-primary-bg, $black);
+$btn-primary-color: var(--btn-primary-color, $white);
+$btn-primary-shadow: var(--btn-primary-shadow, rgba($gray, 0.4));
+$btn-outline-bg: var(--btn-outline-bg, rgba($gray, 0.3));
+
+$input-bg: var(--input-bg, rgba($gray, 0.1));
+$input-focus-bg: var(--input-bg-focus, rgba($gray, 0.3));
+$input-error-color: var(--input-error-color, darken($red, 25%));
+
+$alert-error-bg: var(--alert-error-bg, $tag-color-three);
+
+$todo-item-bg: var(--todo-item-bg, $yellow);
+
+$overlay-bg: var(--overlay-bg, rgba($black, 0.6));

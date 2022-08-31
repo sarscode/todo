@@ -1,3 +1,25 @@
+:root {
+  --system-text-primary-color: #{$text-primary-color};
+  --system-text-secondary-color: #{$text-secondary-color};
+  --system-body-font-family: #{$body-font-family};
+  --system-body-primary-bg: #{$body-primary-bg};
+  --system-body-secondary-bg: #{$body-secondary-bg};
+  --system-tag-color-one: #{$tag-color-one};
+  --system-tag-color-two: #{$tag-color-two};
+  --system-tag-color-three: #{$tag-color-three};
+  --system-tag-color-four: #{$tag-color-four};
+  --system-btn-primary-bg: #{$btn-primary-bg};
+  --system-btn-primary-color: #{$btn-primary-color};
+  --system-btn-primary-shadow: #{$btn-primary-shadow};
+  --system-btn-outline-bg: #{$btn-outline-bg};
+  --system-input-bg: #{$input-bg};
+  --system-input-focus-bg: #{$input-focus-bg};
+  --system-input-error-color: #{$input-error-color};
+  --system-alert-error-bg: #{$alert-error-bg};
+  --system-todo-item-bg: #{$todo-item-bg};
+  --system-overlay-bg: #{$overlay-bg};
+}
+
 html {
   box-sizing: border-box;
 }
@@ -9,6 +31,8 @@ html {
 }
 
 body {
+  color: var(--system-text-primary-color);
+  font-family: var(--system-body-font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
@@ -25,4 +49,13 @@ a {
 
 p {
   line-height: 1.4;
+}
+
+input:focus {
+  outline: none;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
 }
