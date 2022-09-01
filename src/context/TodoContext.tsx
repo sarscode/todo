@@ -3,9 +3,12 @@ import {
   Dispatch,
   PropsWithChildren,
   useContext,
+  useEffect,
   useReducer,
+  useState,
 } from 'react';
 import { ITag, ITodo } from '../@types/todo';
+import { getTodos, getTags } from '../services/firestore';
 
 interface ITodoState {
   todos: ITodo[] | null;
@@ -32,6 +35,7 @@ type IAction = ITodoAction | ITagAction | ITodoBatchAction;
 interface ITodoContext {
   todos: ITodo[] | null;
   tags: ITag[] | null;
+  loadingAll: boolean;
   dispatch: Dispatch<IAction>;
 }
 
@@ -43,6 +47,7 @@ const initialState: ITodoState = {
 const TodoContext = createContext<ITodoContext>({
   todos: null,
   tags: null,
+  loadingAll: false,
   dispatch: () => ({ todos: null, tags: null }),
 });
 
@@ -51,7 +56,6 @@ function todoReducer(state: ITodoState, action: IAction): ITodoState {
     switch (action.type) {
       case 'ADD_TODO':
         let { todos } = state;
-        console.log(action.payload);
         return todos
           ? { ...state, todos: [...todos, action.payload] }
           : { ...state, todos: [action.payload] };
@@ -80,9 +84,31 @@ function todoReducer(state: ITodoState, action: IAction): ITodoState {
 
 function TodoContextProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(todoReducer, initialState);
+  const [loadingAll, setLoadingAll] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log('useTodos is called');
+
+    async function fetchTodos() {
+      setLoadingAll(true);
+      const allTodos = await getTodos();
+      dispatch({ type: 'TODOS', payload: allTodos });
+      setLoadingAll(false);
+    }
+
+    async function fetchTags() {
+      setLoadingAll(true);
+      const allTags = await getTags();
+      dispatch({ type: 'TAGS', payload: allTags });
+      setLoadingAll(false);
+    }
+
+    fetchTags();
+    fetchTodos();
+  }, [dispatch]);
 
   return (
-    <TodoContext.Provider value={{ ...state, dispatch }}>
+    <TodoContext.Provider value={{ ...state, loadingAll, dispatch }}>
       {children}
     </TodoContext.Provider>
   );

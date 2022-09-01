@@ -4,7 +4,7 @@ import { useTodoContext } from '../context/TodoContext';
 import { addTodo, getTags, getTodos, removeTodo } from '../services/firestore';
 
 function useTodos() {
-  const { dispatch, todos, tags } = useTodoContext();
+  const { dispatch, todos, tags, loadingAll } = useTodoContext();
   const [loading, setLoading] = useState<boolean>(false);
 
   const addNewTodo = async (todo: ITodoForm) => {
@@ -24,26 +24,14 @@ function useTodos() {
     setLoading(false);
   };
 
-  useEffect(() => {
-    async function fetchTodos() {
-      setLoading(true);
-      const allTodos = await getTodos();
-      dispatch({ type: 'TODOS', payload: allTodos });
-      setLoading(false);
-    }
-
-    async function fetchTags() {
-      setLoading(true);
-      const allTags = await getTags();
-      dispatch({ type: 'TAGS', payload: allTags });
-      setLoading(false);
-    }
-
-    fetchTags();
-    fetchTodos();
-  }, [dispatch]);
-
-  return { addNewTodo, deleteTodo, todos, tags, loading };
+  return {
+    addNewTodo,
+    deleteTodo,
+    todos,
+    tags,
+    loading,
+    loadingAll,
+  };
 }
 
 export default useTodos;

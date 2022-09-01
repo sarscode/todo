@@ -12,11 +12,11 @@ const cx = classNames.bind(styles);
 
 function Todos() {
   const [showTodoModal, setShowTodoModal] = useState(false);
-  const { todos, tags, loading } = useTodos();
+  const { todos, tags, loadingAll } = useTodos();
 
   return (
     <>
-      {loading ? (
+      {loadingAll ? (
         <Loader variant="page" />
       ) : (
         <Layout
