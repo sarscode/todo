@@ -22,8 +22,8 @@ function Todos() {
         <Layout
           main={
             <div className={cx('wrapper')}>
-              {showTodoModal && tags && (
-                <TodoForm close={() => setShowTodoModal(false)} tags={tags} />
+              {showTodoModal && (
+                <TodoForm close={() => setShowTodoModal(false)} />
               )}
               <div className={cx('sidebar')}>
                 <div className={cx('sidebar-nav')}>

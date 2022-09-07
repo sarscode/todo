@@ -10,17 +10,17 @@ const cx = classNames.bind(styles);
 
 interface Props {
   close: Function;
-  tags: ITag[];
+  todoTags?: ITag[] | null;
   todo?: ITodo;
 }
 
-function TodoForm({ close, tags, todo }: Props) {
-  const { register, handleSubmit } = useForm<ITodoForm>();
-  const { loading, addNewTodo } = useTodos();
+function TodoForm({ close, todoTags, todo }: Props) {
+  const { register, handleSubmit, reset } = useForm<ITodoForm>();
+  const { loading, addNewTodo, tags, editTodo } = useTodos();
 
   const onSubmit: SubmitHandler<ITodoForm> = async (data) => {
     const { title, description, ...tagOptions } = data;
-    const selectedTags = tags.filter(
+    const selectedTags = tags?.filter(
       (tag) => tagOptions[tag.tagName] && tag.id
     );
 
@@ -33,6 +33,9 @@ function TodoForm({ close, tags, todo }: Props) {
         tags: selectedTags,
       });
       console.log(response);
+      reset();
+    } else {
+      editTodo({ ...todo, ...data });
       close();
     }
   };
@@ -41,7 +44,12 @@ function TodoForm({ close, tags, todo }: Props) {
     <Modal root="modal-root" onCloseModal={close} closeOnEsc>
       <form action="" onSubmit={handleSubmit(onSubmit)}>
         <div className={cx('top-controls')}>
-          <Button label="Cancel" variant="outline" onClick={() => close()} />
+          <Button
+            label="Cancel"
+            variant="outline"
+            onClick={() => close()}
+            type="button"
+          />
           <Button
             label={todo ? 'Edit' : 'Add'}
             type="submit"
@@ -55,8 +63,7 @@ function TodoForm({ close, tags, todo }: Props) {
           label="Title"
           id="text"
           fullWidth
-          {...(todo && { value: todo.title })}
-          {...register('title')}
+          {...register('title', { value: todo?.title })}
         />
         <TextArea
           label="Description"
@@ -64,11 +71,10 @@ function TodoForm({ close, tags, todo }: Props) {
           id="description"
           rows={4}
           fullWidth
-          {...(todo && { value: todo.descripton })}
-          {...register('description')}
+          {...register('description', { value: todo?.description })}
         />
         <h3>Tags</h3>
-        {tags.map((tag) => (
+        {tags?.map((tag) => (
           <Tag
             key={tag.id}
             label={tag.tagName}

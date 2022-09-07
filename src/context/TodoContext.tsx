@@ -10,105 +10,97 @@ import {
 import { ITag, ITodo } from '../@types/todo';
 import { getTodos, getTags } from '../services/firestore';
 
-interface ITodoState {
-  todos: ITodo[] | null;
-  tags: ITag[] | null;
-}
+type TodoState = ITodo[] | null;
+type TodoAction =
+  | { type: 'SET'; payload: ITodo[] | null }
+  | { type: 'ADD' | 'EDIT' | 'DELETE'; payload: ITodo };
 
-interface ITodoAction {
-  type: 'ADD_TODO' | 'DELETE_TODO' | 'TODOS';
-  payload?: ITodo | ITodo[];
-}
-
-interface ITodoBatchAction {
-  type: 'TODOS';
-  payload?: ITodo | ITodo[];
-}
-
-interface ITagAction {
-  type: 'EDIT_TAGNAME' | 'TAGS';
-  payload?: ITag | ITag[];
-}
-
-type IAction = ITodoAction | ITagAction | ITodoBatchAction;
-
+type TagState = ITag[] | null;
+type TagAction =
+  | { type: 'SET'; payload: ITag[] }
+  | { type: 'EDIT'; payload: ITag };
 interface ITodoContext {
-  todos: ITodo[] | null;
-  tags: ITag[] | null;
+  todos: TodoState;
+  tags: TagState;
   loadingAll: boolean;
-  dispatch: Dispatch<IAction>;
+  dispatchTodos: Dispatch<TodoAction>;
+  dispatchTags: Dispatch<TagAction>;
 }
-
-const initialState: ITodoState = {
-  todos: null,
-  tags: null,
-};
 
 const TodoContext = createContext<ITodoContext>({
   todos: null,
   tags: null,
   loadingAll: false,
-  dispatch: () => ({ todos: null, tags: null }),
+  dispatchTodos: () => null,
+  dispatchTags: () => null,
 });
 
-function todoReducer(state: ITodoState, action: IAction): ITodoState {
-  if (action.payload && !Array.isArray(action.payload)) {
-    switch (action.type) {
-      case 'ADD_TODO':
-        let { todos } = state;
-        return todos
-          ? { ...state, todos: [...todos, action.payload] }
-          : { ...state, todos: [action.payload] };
-      case 'DELETE_TODO':
-        const { id } = action.payload;
-        const filteredTodos =
-          state.todos?.filter((todo) => todo.id !== id) || null;
-        return { ...state, todos: filteredTodos };
-      default:
-        return state;
-    }
-  }
+const initialTodos: TodoState = null;
 
-  if (Array.isArray(action.payload)) {
-    switch (action.type) {
-      case 'TODOS':
-        return { ...state, todos: action.payload };
-      case 'TAGS':
-        return { ...state, tags: action.payload };
-      default:
-        return state;
-    }
+function todoReducer(state: TodoState, action: TodoAction): TodoState {
+  switch (action.type) {
+    case 'SET':
+      return action.payload;
+    case 'ADD':
+      return state && [...state, action.payload];
+    case 'EDIT':
+      const todo =
+        state?.map((todo) =>
+          todo.id === action.payload.id ? action.payload : todo
+        ) || null;
+      return state && todo;
+    case 'DELETE':
+      const { id } = action.payload;
+      const filteredTodos = state?.filter((todo) => todo.id !== id) || null;
+      return filteredTodos;
+    default:
+      return state;
   }
-  return state;
+}
+
+const initialTags: TagState = null;
+
+function tagReducer(state: TagState, action: TagAction): TagState {
+  switch (action.type) {
+    case 'SET':
+      return action.payload;
+    case 'EDIT':
+      const tag = state?.filter((tag) => tag.id === action.payload.id) || null;
+      const edittedTag = { ...tag, ...action.payload };
+      return state && [...state, edittedTag];
+    default:
+      return state;
+  }
 }
 
 function TodoContextProvider({ children }: PropsWithChildren) {
-  const [state, dispatch] = useReducer(todoReducer, initialState);
+  const [todos, dispatchTodos] = useReducer(todoReducer, initialTodos);
+  const [tags, dispatchTags] = useReducer(tagReducer, initialTags);
   const [loadingAll, setLoadingAll] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log('useTodos is called');
-
     async function fetchTodos() {
       setLoadingAll(true);
-      const allTodos = await getTodos();
-      dispatch({ type: 'TODOS', payload: allTodos });
+      const response = await getTodos();
+      dispatchTodos({ type: 'SET', payload: response });
       setLoadingAll(false);
     }
 
     async function fetchTags() {
       setLoadingAll(true);
-      const allTags = await getTags();
-      dispatch({ type: 'TAGS', payload: allTags });
+      const response = await getTags();
+      dispatchTags({ type: 'SET', payload: response });
       setLoadingAll(false);
     }
 
     fetchTags();
     fetchTodos();
-  }, [dispatch]);
+  }, []);
 
   return (
-    <TodoContext.Provider value={{ ...state, loadingAll, dispatch }}>
+    <TodoContext.Provider
+      value={{ todos, tags, loadingAll, dispatchTodos, dispatchTags }}
+    >
       {children}
     </TodoContext.Provider>
   );
