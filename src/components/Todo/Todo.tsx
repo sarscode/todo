@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Todo.module.scss';
 import { Checkbox, Tag, Menu, MenuButton, MenuList, MenuListItem } from '../';
 import { ITag, ITodo } from '../../@types/todo';
 import useTodos from '../../hooks/useTodos';
+import { useState } from 'react';
+import TodoForm from '../TodoForm/TodoForm';
 
 const cx = classNames.bind(styles);
 
@@ -12,17 +13,22 @@ interface TodoProps extends ITodo {
   description: string;
   id: string;
   tags: ITag[] | null;
-  done?: boolean;
-  markAsDone?: () => boolean;
   todo: ITodo;
 }
 
 function Todo({ todo, tags, description, title }: TodoProps) {
-  const [done, setDone] = useState(false);
-  const { deleteTodo } = useTodos();
+  const { deleteTodo, editTodo } = useTodos();
+  const [showTodoModal, setShowTodoModal] = useState(false);
 
   return (
-    <li className={cx('todo', { done })}>
+    <li className={cx('todo', { done: todo.done })}>
+      {showTodoModal && (
+        <TodoForm
+          todo={todo}
+          close={() => setShowTodoModal(false)}
+          todoTags={tags}
+        />
+      )}
       <div className={cx('todo-header')}>
         <h3 className={cx('todo-title')}>{title}</h3>
         <Menu>
@@ -44,7 +50,9 @@ function Todo({ todo, tags, description, title }: TodoProps) {
             </svg>
           </MenuButton>
           <MenuList align="right">
-            <MenuListItem>Edit . . .</MenuListItem>
+            <MenuListItem onClick={() => setShowTodoModal(true)}>
+              Edit . . .
+            </MenuListItem>
             <MenuListItem onClick={() => deleteTodo(todo)}>Delete</MenuListItem>
           </MenuList>
         </Menu>
@@ -56,7 +64,11 @@ function Todo({ todo, tags, description, title }: TodoProps) {
             <Tag id={tag.id} key={tag.id} label={tag.tagName} hideLabel />
           ))}
         </div>
-        <Checkbox label="Done" onClick={() => setDone(!done)} />
+        <Checkbox
+          label="Done"
+          checked={todo.done}
+          onChange={() => editTodo({ ...todo, done: !todo.done })}
+        />
       </div>
     </li>
   );

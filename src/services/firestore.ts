@@ -10,6 +10,7 @@ import {
   Timestamp,
   onSnapshot,
   doc,
+  setDoc,
 } from 'firebase/firestore';
 import { ITodo, ITodoForm } from '../@types/todo';
 import { db } from './app';
@@ -60,6 +61,10 @@ export async function removeTodo({ id }: ITodo) {
   try {
     await deleteDoc(doc(db, 'todos', id));
   } catch (error) {}
+}
+
+export async function updateTodo(todo: ITodo) {
+  await setDoc(doc(db, 'todos', todo.id), todo);
 }
 
 export function subscribeToDataBaseUpdate(resource: string, cb: Function) {

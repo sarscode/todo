@@ -95,12 +95,15 @@ export function MenuList({ children, padding, align = 'left' }: MenuListProps) {
 }
 
 export function MenuListItem({ children, ...props }: MenuListItemProps) {
+  const { showList, setShowList } = useContext(MenuContext);
+
   return (
     <>
       <li
         {...props}
         className={cx('menu-list-item')}
         data-testid="menu-list-item"
+        onClickCapture={() => setShowList(!showList)}
       >
         {children}
       </li>
