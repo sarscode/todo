@@ -3,12 +3,8 @@ import { ITodo, ITodoForm } from '../@types/todo';
 import { useTodoContext } from '../context/TodoContext';
 import { addTodo, removeTodo, updateTodo } from '../services/firestore';
 
-const timestampInSeconds = () => Math.floor(Date.now() / 1000);
-const timestampInNanoSeconds = () => Math.floor(Date.now() / 1000 / 1000);
-
 function useTodos() {
-  const { dispatchTodos, dispatchTags, todos, tags, loadingAll } =
-    useTodoContext();
+  const { dispatchTodos, todos, tags, loadingAll } = useTodoContext();
   const [loading, setLoading] = useState<boolean>(false);
 
   const addNewTodo = async (todo: ITodoForm) => {
