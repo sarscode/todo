@@ -13,6 +13,7 @@ const cx = classNames.bind(styles);
 function Todos() {
   const [showTodoModal, setShowTodoModal] = useState(false);
   const { todos, tags, loadingAll } = useTodos();
+  const [hideDoneTasks, setHideDoneTasks] = useState<boolean>(false);
 
   return (
     <>
@@ -31,7 +32,10 @@ function Todos() {
                 </div>
                 {todos && todos.length > 0 && (
                   <div className={cx('done')}>
-                    <Checkbox label="Hide Done Tasks" />
+                    <Checkbox
+                      label="Hide Done Tasks"
+                      onChange={() => setHideDoneTasks(!hideDoneTasks)}
+                    />
                   </div>
                 )}
               </div>
@@ -57,7 +61,16 @@ function Todos() {
                     </svg>
                   </span>
                 </div>
-                {todos && tags && <TodoList todos={todos} tags={tags} />}
+                {todos && tags && (
+                  <TodoList
+                    todos={
+                      hideDoneTasks
+                        ? todos.filter((todo) => todo.done !== true)
+                        : todos
+                    }
+                    tags={tags}
+                  />
+                )}
               </main>
             </div>
           }
